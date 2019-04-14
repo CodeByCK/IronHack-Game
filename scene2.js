@@ -16,8 +16,8 @@ let scoreText;
 let score = 0;
 let gameOverText;
 //random number for car speed
-let min = 8
-let max = 20
+let min = 1
+let max = 3
 let randomNum = Math.floor(Math.random() * (max - min) + min)
 let randomNum1 = Math.floor(Math.random() * (max - min) + min)
 let randomNum2 = Math.floor(Math.random() * (max - min) + min)
@@ -35,7 +35,7 @@ class scene2 extends Phaser.Scene {
 
 
     preload() {//everything you need to load here
-        this.load.image('background', './assets/background.png')
+        this.load.image('background', './assets/bg1.png')
         this.load.image('car8', './assets/car4.png')
         this.load.image('car7', './assets/car2.png')
         this.load.image('car6', './assets/car.png')
@@ -46,25 +46,35 @@ class scene2 extends Phaser.Scene {
         this.load.image('car', './assets/car.png');
         this.load.spritesheet('player', './assets/chicken.png', { frameWidth: 50, frameHeight: 40 })
         this.load.audio('over', './assets/GAMEOVER.wav')
-        this.load.audio('jump', 'https://freesound.org/data/previews/160/160603_1619906-lq.mp3');
-        this.load.image('star', './assets/star.png');
+        this.load.audio('jump', 'http://freesound.org/data/previews/456/456374_9498993-lq.mp3');
+        this.load.audio('crash', 'http://freesound.org/data/previews/237/237375_1502374-lq.mp3');
+        this.load.image('star', './assets/star1.png');
 
 
     }
 
     create() {// make it do things
-
-        this.image = this.add.image(400, 300, 'background');
+        let camera = this.cameras.main;
+        camera.setViewport(0, 0, 800, 600);
+        this.add.tileSprite(0, 0, 800, 5000, "background").setOrigin(0);
+        // this.image = this.add.image(400, -1900, 'background');
+        this.physics.world.setBounds(0, 0, 800, 5000);
         //make object move
-        car8 = this.add.sprite(-200, 70, 'car8')
-        car7 = this.add.sprite(-210, 123, 'car7');
-        car6 = this.add.sprite(-220, 168, 'car6');
-        car5 = this.add.sprite(-190, 215, 'car5');
-        car4 = this.add.sprite(-200, 318, 'car4')
-        car3 = this.add.sprite(-210, 370, 'car3')
-        car2 = this.add.sprite(-220, 423, 'car2');
-        car = this.add.sprite(-190, 473, 'car');
-        player = this.physics.add.sprite(400, 527, 'player');
+        car8 = this.add.sprite(-200, 623, 'car8')//lane9
+        car7 = this.add.sprite(-210, 573, 'car7');//lane8
+        car6 = this.add.sprite(-220, 473, 'car6');//lane7
+        car5 = this.add.sprite(-190, 423, 'car5');//lane6
+        car4 = this.add.sprite(-200, 373, 'car4')//lane5
+        car3 = this.add.sprite(-210, 273, 'car3')//lane4
+        car2 = this.add.sprite(-220, 223, 'car2');//lane3
+        car = this.add.sprite(-190, 123, 'car');//lane2
+        player = this.physics.add.sprite(400, 75, 'player');//lane1
+        player.setCollideWorldBounds(true)
+
+        camera.setBounds(0, 0, 800, 5000);
+        camera.startFollow(player);
+
+        //animation for character
         this.anims.create({
             key: "down",
             repeat: 0,
@@ -99,7 +109,7 @@ class scene2 extends Phaser.Scene {
         }, this)
         this.input.keyboard.on('keyup_UP', function (event) {
             this.sound.play('jump')
-            player.y -= 52;
+            player.y -= 50;
 
         }, this)
         this.input.keyboard.on('keyup_LEFT', function (event) {
@@ -109,14 +119,13 @@ class scene2 extends Phaser.Scene {
         }, this)
         this.input.keyboard.on('keyup_DOWN', function (event) {
             player.play("down")
-            player.y += 52;
+            player.y += 50;
 
         }, this)
-        player.setCollideWorldBounds(true)
 
         //Counter Text
-        this.scoreText = this.add.text(580, 550, 'score: 0', { fontSize: '32px', fill: '#473A15' });
-        this.gameOverText = this.add.text(400, 275, 'TRY AGAIN', { fontSize: '100px', fill: 'red' });
+        this.scoreText = this.add.text(0, 50, 'score: 0', { fontSize: '32px', fill: '#473A15' });
+        this.gameOverText = this.add.text(400, 4500, 'TRY AGAIN', { fontSize: '100px', fill: 'red' });
         this.gameOverText.setOrigin(0.5)
         this.gameOverText.visible = false
         // stars
@@ -133,6 +142,7 @@ class scene2 extends Phaser.Scene {
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car.getBounds())) {
             this.gameOver();
+
         }
         car2.x += randomNum1;
         car2.flipX = true;
@@ -195,6 +205,7 @@ class scene2 extends Phaser.Scene {
             randomNum7 = Math.floor(Math.random() * (max - min) + min)
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car8.getBounds())) {
+
             this.gameOver();//collision
         }
     };
@@ -217,19 +228,20 @@ class scene2 extends Phaser.Scene {
         }, [], this);
 
         this.gameOverText.visible = true
+
+        score = 0 //reset score to 0
+
     };
 
 
     createStars() {
+
         this.stars = this.physics.add.group({
             key: 'star',
-            repeat: 6,
-            setXY: { x: 28, y: 20, stepX: 150 }
+            repeat: 100,
+            setXY: { x: 400, y: 30, stepY: 50 }
         });
 
-        this.stars.children.iterate((child) => {
-            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-        });
         this.physics.add.overlap(player, this.stars, this.collectStar, null, this);
     }
 
