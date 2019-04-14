@@ -11,10 +11,10 @@ let car8;
 let player;
 let playerSpeed = 5;
 let zone;
-let score = 0;
 let stars;
 let scoreText;
-
+let score = 0;
+let gameOverText;
 //random number for car speed
 let min = 8
 let max = 20
@@ -32,7 +32,6 @@ class scene2 extends Phaser.Scene {
     constructor() {
         super({ key: "scene2" });
     }
-
 
 
     preload() {//everything you need to load here
@@ -116,16 +115,14 @@ class scene2 extends Phaser.Scene {
         player.setCollideWorldBounds(true)
 
         //Counter Text
-        scoreText = this.add.text(580, 550, 'score: 0', { fontSize: '32px', fill: '#000' });
+        this.scoreText = this.add.text(580, 550, 'score: 0', { fontSize: '32px', fill: '#473A15' });
+        this.gameOverText = this.add.text(400, 275, 'TRY AGAIN', { fontSize: '100px', fill: 'red' });
+        this.gameOverText.setOrigin(0.5)
+        this.gameOverText.visible = false
+        // stars
+        this.createStars()
 
-        stars
-        stars = this.physics.add.group({
-            key: 'star',
-            repeat: 11,
-            setXY: { x: 28, y: 20, stepX: 150 }
-        });
 
-        // this.physics.add.overlap(player, stars, collectStar, null, this);
     }
     update(delta) { //animate
         // move cars
@@ -144,7 +141,7 @@ class scene2 extends Phaser.Scene {
             randomNum1 = Math.floor(Math.random() * (max - min) + min)
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car2.getBounds())) {
-            this.gameOver();
+            this.gameOver();//collision
         }
         car3.x -= randomNum2;
         if (car3.x < -100) {
@@ -153,7 +150,7 @@ class scene2 extends Phaser.Scene {
 
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car3.getBounds())) {
-            this.gameOver();
+            this.gameOver();//collision
         }
         car4.x += randomNum3;
         car4.flipX = true;
@@ -162,7 +159,7 @@ class scene2 extends Phaser.Scene {
             randomNum3 = Math.floor(Math.random() * (max - min) + min)
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car4.getBounds())) {
-            this.gameOver();
+            this.gameOver();//collision
         }
 
         car5.x += randomNum;
@@ -172,7 +169,7 @@ class scene2 extends Phaser.Scene {
             randomNum4 = Math.floor(Math.random() * (max - min) + min)
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car5.getBounds())) {
-            this.gameOver();
+            this.gameOver();//collision
         }
         car6.x -= randomNum1;
         if (car6.x < -100) {
@@ -180,7 +177,7 @@ class scene2 extends Phaser.Scene {
             randomNum5 = Math.floor(Math.random() * (max - min) + min)
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car6.getBounds())) {
-            this.gameOver();
+            this.gameOver();//collision
         }
         car7.x += randomNum2;
         car7.flipX = true;
@@ -190,7 +187,7 @@ class scene2 extends Phaser.Scene {
 
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car7.getBounds())) {
-            this.gameOver();
+            this.gameOver();//collision
         }
         car8.x -= randomNum3;
         if (car8.x < -100) {
@@ -198,7 +195,7 @@ class scene2 extends Phaser.Scene {
             randomNum7 = Math.floor(Math.random() * (max - min) + min)
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car8.getBounds())) {
-            this.gameOver();
+            this.gameOver();//collision
         }
     };
 
@@ -210,7 +207,7 @@ class scene2 extends Phaser.Scene {
         this.cameras.main.shake(500);
 
         // fade camera
-        this.time.delayedCall(250, function () {
+        this.time.delayedCall(550, function () {
             this.cameras.main.fade(250);
         }, [], this);
 
@@ -218,13 +215,28 @@ class scene2 extends Phaser.Scene {
         this.time.delayedCall(500, function () {
             this.scene.restart();
         }, [], this);
+
+        this.gameOverText.visible = true
     };
 
-    // collectStar = function (player, star) {
-    //     score += 10;
-    //     this.setText('Score: ' + this.score);
-    // };
 
+    createStars() {
+        this.stars = this.physics.add.group({
+            key: 'star',
+            repeat: 6,
+            setXY: { x: 28, y: 20, stepX: 150 }
+        });
 
+        this.stars.children.iterate((child) => {
+            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+        });
+        this.physics.add.overlap(player, this.stars, this.collectStar, null, this);
+    }
+
+    collectStar(player, star) {
+        star.disableBody(true, true)
+        score += 10;
+        this.scoreText.setText('Score: ' + score);
+    }
 
 }
