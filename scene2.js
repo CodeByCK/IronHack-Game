@@ -20,6 +20,15 @@ let car17;
 let car18;
 let car19;
 let car20;
+let car21;
+let car22;
+let car23;
+let car24;
+let car25;
+let car26;
+let car27;
+let car28;
+let car29;
 let car30;
 let car31;
 let car32;
@@ -59,8 +68,8 @@ let scoreText;
 let score = 0;
 let gameOverText;
 //random number for car speed
-let min = 8
-let max = 20
+let min = 1
+let max = 5
 let randomNum = Math.floor(Math.random() * (max - min) + min)
 let randomNum1 = Math.floor(Math.random() * (max - min) + min)
 let randomNum2 = Math.floor(Math.random() * (max - min) + min)
@@ -77,6 +86,19 @@ let randomNum12 = Math.floor(Math.random() * (max - min) + min)
 let randomNum13 = Math.floor(Math.random() * (max - min) + min)
 let randomNum14 = Math.floor(Math.random() * (max - min) + min)
 let randomNum15 = Math.floor(Math.random() * (max - min) + min)
+let randomNum16 = Math.floor(Math.random() * (max - min) + min)
+let randomNum17 = Math.floor(Math.random() * (max - min) + min)
+let randomNum18 = Math.floor(Math.random() * (max - min) + min)
+let randomNum19 = Math.floor(Math.random() * (max - min) + min)
+let randomNum20 = Math.floor(Math.random() * (max - min) + min)
+let randomNum21 = Math.floor(Math.random() * (max - min) + min)
+let randomNum22 = Math.floor(Math.random() * (max - min) + min)
+let randomNum23 = Math.floor(Math.random() * (max - min) + min)
+let randomNum24 = Math.floor(Math.random() * (max - min) + min)
+let randomNum25 = Math.floor(Math.random() * (max - min) + min)
+let randomNum26 = Math.floor(Math.random() * (max - min) + min)
+let randomNum27 = Math.floor(Math.random() * (max - min) + min)
+let randomNum28 = Math.floor(Math.random() * (max - min) + min)
 
 
 class scene2 extends Phaser.Scene {
@@ -87,7 +109,25 @@ class scene2 extends Phaser.Scene {
 
     preload() {//everything you need to load here
         this.load.image('background', './assets/bg1.png')
-        this.load.image('car10', './assets/car4.png')
+        this.load.image('car28', './assets/car4.png')
+        this.load.image('car27', './assets/car2.png')
+        this.load.image('car26', './assets/car.png')
+        this.load.image('car25', './assets/car2.png')
+        this.load.image('car24', './assets/car4.png')
+        this.load.image('car23', './assets/car2.png')
+        this.load.image('car22', './assets/car4.png');
+        this.load.image('car21', './assets/car.png')
+        this.load.image('car20', './assets/car2.png')
+        this.load.image('car19', './assets/car4.png')
+        this.load.image('car18', './assets/car.png')
+        this.load.image('car17', './assets/car2.png')
+        this.load.image('car16', './assets/car.png')
+        this.load.image('car15', './assets/car.png')
+        this.load.image('car14', './assets/car2.png')
+        this.load.image('car13', './assets/car4.png')
+        this.load.image('car12', './assets/car.png')
+        this.load.image('car11', './assets/car2.png')
+        this.load.image('car10', './assets/car.png')
         this.load.image('car9', './assets/car.png')
         this.load.image('car8', './assets/car4.png')
         this.load.image('car7', './assets/car2.png')
@@ -113,17 +153,35 @@ class scene2 extends Phaser.Scene {
         // this.image = this.add.image(400, -1900, 'background');
         this.physics.world.setBounds(0, 0, 800, 5000);
         //make object move
-        car10 = this.add.sprite(-200, 723, 'car10')//lane11
-        car9 = this.add.sprite(-200, 673, 'car9')//lane10
-        car8 = this.add.sprite(-200, 623, 'car8')//lane9
-        car7 = this.add.sprite(-210, 573, 'car7');//lane8
-        car6 = this.add.sprite(-220, 473, 'car6');//lane7
-        car5 = this.add.sprite(-190, 423, 'car5');//lane6
-        car4 = this.add.sprite(-200, 373, 'car4')//lane5
-        car3 = this.add.sprite(-210, 273, 'car3')//lane4
-        car2 = this.add.sprite(-220, 223, 'car2');//lane3
-        car1 = this.add.sprite(-190, 123, 'car1');//lane2
-        player = this.physics.add.sprite(400, 75, 'player');//lane1
+        car28 = this.add.sprite(-200, 1773, 'car28');
+        car27 = this.add.sprite(-200, 1723, 'car27');
+        car26 = this.add.sprite(-200, 1673, 'car26');
+        car25 = this.add.sprite(-200, 1623, 'car25');
+        car24 = this.add.sprite(-200, 1573, 'car24');
+        car23 = this.add.sprite(-200, 1523, 'car23');
+        car22 = this.add.sprite(-200, 1473, 'car22');
+        car21 = this.add.sprite(-200, 1373, 'car21');
+        car20 = this.add.sprite(-200, 1323, 'car20');
+        car19 = this.add.sprite(-200, 1273, 'car19');
+        car18 = this.add.sprite(-200, 1223, 'car18');
+        car17 = this.add.sprite(-200, 1173, 'car17');
+        car16 = this.add.sprite(-200, 1123, 'car16');
+        car15 = this.add.sprite(-200, 1023, 'car15');
+        car14 = this.add.sprite(-200, 973, 'car14');
+        car13 = this.add.sprite(-200, 923, 'car13');
+        car12 = this.add.sprite(-200, 873, 'car12');
+        car11 = this.add.sprite(-200, 823, 'car11');
+        car10 = this.add.sprite(-200, 723, 'car10');
+        car9 = this.add.sprite(-200, 673, 'car9');
+        car8 = this.add.sprite(-200, 623, 'car8');
+        car7 = this.add.sprite(-210, 573, 'car7');
+        car6 = this.add.sprite(-220, 473, 'car6');
+        car5 = this.add.sprite(-190, 423, 'car5');
+        car4 = this.add.sprite(-200, 373, 'car4');
+        car3 = this.add.sprite(-210, 273, 'car3');
+        car2 = this.add.sprite(-220, 223, 'car2');
+        car1 = this.add.sprite(-190, 123, 'car1');
+        player = this.physics.add.sprite(400, 75, 'player');
         player.setCollideWorldBounds(true)
 
         camera.setBounds(0, 0, 800, 5000);
@@ -190,6 +248,7 @@ class scene2 extends Phaser.Scene {
     }
     update(delta) { //animate
         // move cars
+        //============================LANE 1=============================================
         car1.x -= randomNum;
         if (car1.x < -100) {
             car1.x = 950;
@@ -199,6 +258,8 @@ class scene2 extends Phaser.Scene {
             this.gameOver();
 
         }
+
+        //============================LANE 2=============================================
         car2.x += randomNum1;
         car2.flipX = true;
         if (car2.x > 800) {
@@ -208,15 +269,18 @@ class scene2 extends Phaser.Scene {
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car2.getBounds())) {
             this.gameOver();//collision
         }
+
+
         car3.x -= randomNum2;
         if (car3.x < -100) {
             car3.x = 950;
             randomNum2 = Math.floor(Math.random() * (max - min) + min)
-
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car3.getBounds())) {
             this.gameOver();//collision
         }
+
+        //============================LANE 3=============================================
         car4.x += randomNum3;
         car4.flipX = true;
         if (car4.x > 800) {
@@ -227,61 +291,241 @@ class scene2 extends Phaser.Scene {
             this.gameOver();//collision
         }
 
+
         car5.x -= randomNum4;
         if (car5.x < -100) {
             car5.x = 950;
             randomNum4 = Math.floor(Math.random() * (max - min) + min)
-
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car5.getBounds())) {
             this.gameOver();//collision
         }
+
 
         car6.x += randomNum5;
         car6.flipX = true;
         if (car6.x > 800) {
             car6.x = -145;
             randomNum5 = Math.floor(Math.random() * (max - min) + min)
-            if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car6.getBounds())) {
-                this.gameOver();//collision
-            }
         }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car6.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        //============================LANE 4=============================================
         car7.x -= randomNum6;
         if (car7.x < -100) {
             car7.x = 950;
             randomNum6 = Math.floor(Math.random() * (max - min) + min)
-
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car7.getBounds())) {
             this.gameOver();//collision
         }
+
         car8.x += randomNum7;
         car8.flipX = true;
         if (car8.x > 800) {
             car8.x = -145;
             randomNum7 = Math.floor(Math.random() * (max - min) + min)
-            if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car8.getBounds())) {
-                this.gameOver();//collision
-            }
         }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car8.getBounds())) {
+            this.gameOver();//collision
+        }
+
         car9.x -= randomNum8;
         if (car9.x < -100) {
             car9.x = 950;
             randomNum8 = Math.floor(Math.random() * (max - min) + min)
-
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car9.getBounds())) {
             this.gameOver();//collision
         }
+
         car10.x += randomNum9;
         car10.flipX = true;
         if (car10.x > 800) {
             car10.x = -145;
             randomNum9 = Math.floor(Math.random() * (max - min) + min)
-            if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car10.getBounds())) {
-                this.gameOver();//collision
-            }
         }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car10.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        //============================LANE 5=============================================
+        car11.x -= randomNum10;
+        if (car11.x < -100) {
+            car11.x = 950;
+            randomNum10 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car11.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car12.x += randomNum11;
+        car12.flipX = true;
+        if (car12.x > 800) {
+            car12.x = -145;
+            randomNum11 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car12.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car13.x -= randomNum12;
+        if (car13.x < -100) {
+            car13.x = 950;
+            randomNum12 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car13.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car14.x += randomNum13;
+        car14.flipX = true;
+        if (car14.x > 800) {
+            car14.x = -145;
+            randomNum13 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car14.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car15.x -= randomNum14;
+        if (car15.x < -100) {
+            car15.x = 950;
+            randomNum14 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car15.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        //============================LANE 6=============================================
+
+        car16.x += randomNum15;
+        car16.flipX = true;
+        if (car16.x > 800) {
+            car16.x = -145;
+            randomNum15 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car16.getBounds())) {
+            this.gameOver();//collision
+        }
+
+
+        car17.x -= randomNum16;
+        if (car17.x < -100) {
+            car17.x = 950;
+            randomNum16 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car17.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car18.x += randomNum17;
+        car18.flipX = true;
+        if (car18.x > 800) {
+            car18.x = -145;
+            randomNum17 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car18.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car19.x -= randomNum18;
+        if (car19.x < -100) {
+            car19.x = 950;
+            randomNum18 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car19.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car20.x += randomNum19;
+        car20.flipX = true;
+        if (car20.x > 800) {
+            car20.x = -145;
+            randomNum19 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car20.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car21.x -= randomNum20;
+        if (car21.x < -100) {
+            car21.x = 950;
+            randomNum20 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car21.getBounds())) {
+            this.gameOver();//collision
+        }
+        //============================LANE 7=============================================
+        car22.x += randomNum21;
+        car22.flipX = true;
+        if (car22.x > 800) {
+            car22.x = -145;
+            randomNum21 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car22.getBounds())) {
+            this.gameOver();//collision
+        }
+
+
+        car23.x -= randomNum22;
+        if (car23.x < -100) {
+            car23.x = 950;
+            randomNum22 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car23.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car24.x += randomNum23;
+        car24.flipX = true;
+        if (car24.x > 800) {
+            car24.x = -145;
+            randomNum23 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car24.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car25.x -= randomNum24;
+        if (car25.x < -100) {
+            car25.x = 950;
+            randomNum22 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car25.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car26.x += randomNum25;
+        car26.flipX = true;
+        if (car26.x > 800) {
+            car26.x = -145;
+            randomNum25 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car26.getBounds())) {
+            this.gameOver();//collision
+        }
+
+        car27.x -= randomNum26;
+        if (car27.x < -100) {
+            car27.x = 950;
+            randomNum26 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car27.getBounds())) {
+            this.gameOver();//collision
+        }
+        car28.x += randomNum27;
+        car28.flipX = true;
+        if (car28.x > 800) {
+            car28.x = -145;
+            randomNum27 = Math.floor(Math.random() * (max - min) + min)
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car28.getBounds())) {
+            this.gameOver();//collision
+        }
+
     };
 
     gameOver = function () {
