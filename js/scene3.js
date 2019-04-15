@@ -5,12 +5,21 @@ class scene3 extends Phaser.Scene {
     }
 
     preload() {
-        this.preload.audio('test', ['AUDIO GOES HERE'])
-    }
+        this.load.image('instructions', './assets/instructions.png')
 
+    }
 
     create() {
-        this.soundFX = this.soundFX.add('test', { loop: "true" })
+        this.image = this.add.image(400, 300, 'instructions')
+
+
+        this.input.keyboard.on('keyup_ESC', function (event) {
+            this.scene.stop("scene3");
+        }, this)
+
     }
+
+
+
 
 }
