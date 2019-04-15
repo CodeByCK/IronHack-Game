@@ -193,7 +193,6 @@ class scene2 extends Phaser.Scene {
         this.load.image('car2', './assets/car4.png');
         this.load.image('car1', './assets/car.png');
         this.load.spritesheet('player', './assets/chicken.png', { frameWidth: 40, frameHeight: 40 })
-        this.load.audio('over', './assets/GAMEOVER.wav')
         this.load.audio('jump', './assets/jump.mp3');
         this.load.audio('jumpB', "./assets/jumpB.mp3");
         this.load.image('star', './assets/star1.png');
@@ -323,8 +322,8 @@ class scene2 extends Phaser.Scene {
         }, this)
 
         //Counter Text
-        this.scoreText = this.add.text(0, 0, 'score: 0', { fontSize: '32px', fill: 'white' });
-        this.gameOverText = this.add.text(400, 4500, 'TRY AGAIN', { fontSize: '100px', fill: 'red' });
+        this.scoreText = this.add.text(0, 0, 'score: 0', { fontSize: '32px', fill: 'white' }).setScrollFactor(0)
+        this.gameOverText = this.add.text(400, 300, 'TRY AGAIN', { fontSize: '100px', fill: 'red' }).setScrollFactor(0)
         this.gameOverText.setOrigin(0.5)
         this.gameOverText.visible = false
 
