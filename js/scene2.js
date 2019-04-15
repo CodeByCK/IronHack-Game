@@ -194,8 +194,8 @@ class scene2 extends Phaser.Scene {
         this.load.image('car1', './assets/car.png');
         this.load.spritesheet('player', './assets/chicken.png', { frameWidth: 40, frameHeight: 40 })
         this.load.audio('over', './assets/GAMEOVER.wav')
-        this.load.audio('jump', 'http://freesound.org/data/previews/459/459156_6142149-lq.mp3');
-        this.load.audio('jumpB', "http://freesound.org/data/previews/459/459341_6142149-lq.mp3");
+        this.load.audio('jump', './assets/jump.mp3');
+        this.load.audio('jumpB', "./assets/jumpB.mp3");
         this.load.image('star', './assets/star1.png');
 
 
