@@ -68,8 +68,8 @@ let scoreText;
 let score = 0;
 let gameOverText;
 //random number for car speed
-let min = 1
-let max = 5
+let min = 8
+let max = 13
 let randomNum = Math.floor(Math.random() * (max - min) + min)
 let randomNum1 = Math.floor(Math.random() * (max - min) + min)
 let randomNum2 = Math.floor(Math.random() * (max - min) + min)
@@ -125,8 +125,6 @@ let randomNum51 = Math.floor(Math.random() * (max - min) + min)
 let randomNum52 = Math.floor(Math.random() * (max - min) + min)
 let randomNum53 = Math.floor(Math.random() * (max - min) + min)
 let randomNum54 = Math.floor(Math.random() * (max - min) + min)
-let randomNum55 = Math.floor(Math.random() * (max - min) + min)
-let randomNum56 = Math.floor(Math.random() * (max - min) + min)
 
 
 class scene2 extends Phaser.Scene {
@@ -136,6 +134,7 @@ class scene2 extends Phaser.Scene {
 
 
     preload() {//everything you need to load here
+
         this.load.image('background', './assets/bg1.png')
         this.load.image('car55', './assets/car2.png')
         this.load.image('car54', './assets/car.png')
@@ -193,10 +192,10 @@ class scene2 extends Phaser.Scene {
         this.load.image('car3', './assets/car2.png')
         this.load.image('car2', './assets/car4.png');
         this.load.image('car1', './assets/car.png');
-        this.load.spritesheet('player', './assets/chicken.png', { frameWidth: 50, frameHeight: 40 })
+        this.load.spritesheet('player', './assets/chicken.png', { frameWidth: 40, frameHeight: 40 })
         this.load.audio('over', './assets/GAMEOVER.wav')
-        this.load.audio('jump', 'http://freesound.org/data/previews/456/456374_9498993-lq.mp3');
-        this.load.audio('crash', 'http://freesound.org/data/previews/237/237375_1502374-lq.mp3');
+        this.load.audio('jump', 'http://freesound.org/data/previews/459/459156_6142149-lq.mp3');
+        this.load.audio('jumpB', "http://freesound.org/data/previews/459/459341_6142149-lq.mp3");
         this.load.image('star', './assets/star1.png');
 
 
@@ -276,55 +275,59 @@ class scene2 extends Phaser.Scene {
             key: "down",
             repeat: 0,
             frameRate: 30,
-            frames: this.anims.generateFrameNames('player', { start: 1, end: 4 })
+            frames: this.anims.generateFrameNames('player', { start: 0, end: 4 })
         })
         this.anims.create({
             key: "up",
             repeat: 0,
             frameRate: 30,
-            frames: this.anims.generateFrameNames('player', { start: 5, end: 8 })
+            frames: this.anims.generateFrameNames('player', { start: 5, end: 9 })
         })
         this.anims.create({
             key: "left",
             repeat: 0,
             frameRate: 30,
-            frames: this.anims.generateFrameNames('player', { start: 11, end: 15 })
+            frames: this.anims.generateFrameNames('player', { start: 10, end: 14 })
         })
         this.anims.create({
             key: "right",
             repeat: 0,
             frameRate: 30,
 
-            frames: this.anims.generateFrameNames('player', { start: 11, end: 15 })
+            frames: this.anims.generateFrameNames('player', { start: 15, end: 20 })
         })
 
         //key inputs
         this.input.keyboard.on('keyup_RIGHT', function (event) {
+            player.anims.play("right", true);
             player.x += 60;
 
 
         }, this)
         this.input.keyboard.on('keyup_UP', function (event) {
-            this.sound.play('jump')
+            player.anims.play("up", true);
+            this.sound.play('jumpB')
             player.y -= 50;
 
         }, this)
         this.input.keyboard.on('keyup_LEFT', function (event) {
-            player.play('left')
+            player.anims.play("left", true);
             player.x -= 60;
 
         }, this)
         this.input.keyboard.on('keyup_DOWN', function (event) {
-            player.play("down")
+            player.anims.play("down", true);
+            this.sound.play('jump')
             player.y += 50;
 
         }, this)
 
         //Counter Text
-        this.scoreText = this.add.text(0, 50, 'score: 0', { fontSize: '32px', fill: '#473A15' });
+        this.scoreText = this.add.text(0, 0, 'score: 0', { fontSize: '32px', fill: 'white' });
         this.gameOverText = this.add.text(400, 4500, 'TRY AGAIN', { fontSize: '100px', fill: 'red' });
         this.gameOverText.setOrigin(0.5)
         this.gameOverText.visible = false
+
         // stars
         this.createStars()
 
@@ -576,7 +579,7 @@ class scene2 extends Phaser.Scene {
         car25.x -= randomNum24;
         if (car25.x < -100) {
             car25.x = 950;
-            randomNum22 = Math.floor(Math.random() * (max - min) + min)
+            randomNum24 = Math.floor(Math.random() * (max - min) + min)
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car25.getBounds())) {
             this.gameOver();//collision
@@ -815,7 +818,7 @@ class scene2 extends Phaser.Scene {
         car50.flipX = true;
         if (car50.x > 800) {
             car50.x = -145;
-            randomNum39 = Math.floor(Math.random() * (max - min) + min)
+            randomNum49 = Math.floor(Math.random() * (max - min) + min)
         }
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), car50.getBounds())) {
             this.gameOver();//collision
@@ -888,6 +891,8 @@ class scene2 extends Phaser.Scene {
 
         score = 0 //reset score to 0
 
+
+
     };
 
 
@@ -905,7 +910,7 @@ class scene2 extends Phaser.Scene {
     collectStar(player, star) {
         star.disableBody(true, true)
         score += 1;
-        this.scoreText.setText('Lanes: ' + score);
+        this.scoreText.setText('score:  ' + score);
     }
 
 }
