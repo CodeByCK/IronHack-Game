@@ -70,6 +70,7 @@ let gameOverText;
 //random number for car speed
 let min = 8
 let max = 13
+
 let randomNum = Math.floor(Math.random() * (max - min) + min)
 let randomNum1 = Math.floor(Math.random() * (max - min) + min)
 let randomNum2 = Math.floor(Math.random() * (max - min) + min)
