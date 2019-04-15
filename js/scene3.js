@@ -12,4 +12,5 @@ class scene3 extends Phaser.Scene {
     create() {
         this.soundFX = this.soundFX.add('test', { loop: "true" })
     }
+
 }
