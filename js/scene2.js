@@ -53,7 +53,6 @@ class scene2 extends Phaser.Scene {
         for (let k = yAxis.length; k >= 2; k--) {
             this['car' + k] = this.add.sprite(-200, yAxis[k], `car${k}`)
         }
-        console.log("======= ", this)
         //animation for character
         this.anims.create({
             key: "down",
@@ -111,7 +110,6 @@ class scene2 extends Phaser.Scene {
     }
     update(delta) { //animate
         // move cars
-        let randomCar = Math.floor(Math.random() * 55)
         for (let i = 1; i <= yAxis.length; i++) {// looping over vehicles
             if (i % 2 == 0) {// even vehicles will flip over the X axis and move the other direction
                 this['car' + i].x += Sarr[i];// direction of car moving
