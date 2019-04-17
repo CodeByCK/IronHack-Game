@@ -4,7 +4,7 @@ let config = {
     height: 600,
     canvas: document.getElementById("canvas"),
     physics: {
-        default: 'arcade'
+        default: 'arcade',
     },
 
 
