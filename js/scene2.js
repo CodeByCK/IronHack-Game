@@ -134,7 +134,7 @@ class scene2 extends Phaser.Scene {
             }
         }
     };
-    gameOver = function () {
+    gameOver() {
         // flag to set player is dead
         this.isPlayerAlive = false;
         // shake the camera

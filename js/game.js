@@ -2,7 +2,6 @@ let config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    canvas: document.getElementById("canvas"),
     physics: {
         default: 'arcade',
     },
